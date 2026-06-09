@@ -1,0 +1,111 @@
+
+#game{
+    background-color:#32393d;
+    height:100vh;
+}
+
+header{
+    background-color:#90a4ae;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    border: 2px solid green;
+}
+
+#answer-list{
+    border: 2px solid blue;
+    list-style-type:none;
+    padding:1.2rem 1rem;
+    display:flex;
+    flex-direction:column;
+    gap:.2rem;
+    align-items:center;
+    justify-content:center;
+    max-width:100%;
+}
+
+
+.answer-btn{
+    border-radius:10px;
+    border:none;
+    cursor:pointer;
+    width: 80vh;
+    height: 9vh;
+    background-color:#32393d;
+    color:azure;
+    border: 4px solid pink;}
+
+.answer-btn:hover{
+    background-color:#424b50;
+    color:rgb(255, 255, 255);
+    transition: background-color 0.3s ease;
+
+}
+
+#score-display{
+    font-size:1.3rem;
+}
+
+#question-card{
+    padding: 0.4rem 1.4rem;
+    border: 2px solid red;
+    box-shadow: 0 4px 20px 0;
+    background-color:#90a4ae;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    max-width:100%;
+}
+#question-number{
+    font-size:1rem;
+}
+#question-text{
+    display:flex;
+    justify-content:center;
+    color:azure;
+    align-items:center;
+    border: 3px solid yellow;
+    display:flex;
+    flex-direction:column;
+    max-width:100%;
+}
+/* Applied to the button the player clicked — correct answer */
+.correct {
+  background-color: #4caf50;
+  color: white;
+  border-color: #388e3c;
+}
+
+/* Applied to the button the player clicked — wrong answer */
+.wrong {
+  background-color: #e53935;
+  color: white;
+  border-color: #c62828;
+}
+
+/* Applied to all answer buttons after a choice is made */
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: default;
+}
+
+/* Applied to #question-card after an answer is locked in */
+.answered {
+  border-left: 4px solid #90a4ae;
+}
+
+/* Hides an element — used on next-btn and end-screen initially */
+.hidden {
+  display: none;
+}
+
+#end-screen{
+    background-color:white;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
