@@ -198,11 +198,44 @@ nextBtn.addEventListener("click", () =>
     }
     else{
         showEndScreen();
-        nextBtn.disabled = true;
+        nextBtn.classList.add("hidden");
     }
 }
 );
 
+endScreen.addEventListener("click",(event)=>
+{
+  // 1. Return early if the clicked element is not the restart button
+  //    hint: check event.target.id
+  //    think: why can't we just do document.getElementById("restart-btn") at the top of the file?
+
+    if (event.target.id !== "restart-btn"){
+        return;
+    }
+
+  // 2. Reset both state variables (score and currentIndex) to 0
+  //    - Also update scoreDisplay.textContent so the header reflects the reset
+
+    score = 0;
+    currentIndex = 0;
+
+    scoreDisplay.textContent = score;
+
+  // 3. Clear everything showEndScreen built
+  //    hint: setting endScreen.innerHTML to "" removes all child elements at once
+
+    endScreen.innerHTML = "";
+
+  // 4. Bring the question card back
+
+    questionCard.classList.remove("hidden");
+    
+  // 5. Load the first question
+
+    loadQuestion(0);
+
+}
+);
 
 
 
