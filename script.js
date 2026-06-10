@@ -21,7 +21,7 @@ const questions = [
     {
         text: "What is the first?",
         answers: [
-            "Tim Berners-Lee",
+            "Tim -Lee",
             "Bill Gates",
             "Linus Torvalds",
             "Ada Lovelace"
@@ -37,7 +37,7 @@ const questions = [
             "Linus Torvalds",
             "Ada Lovelace"
         ],
-        correct: 0 //index of the correct answer in the answers array
+        correct: 2 //index of the correct answer in the answers array
     },
     {
         text: "What is the third?",
@@ -47,7 +47,7 @@ const questions = [
             "Linus Torvalds",
             "Ada Lovelace"
         ],
-        correct: 0 //index of the correct answer in the answers array
+        correct: 3 //index of the correct answer in the answers array
     },
     {
         text: "What is the fourth?",
@@ -57,7 +57,7 @@ const questions = [
             "Linus Torvalds",
             "Ada Lovelace"
         ],
-        correct: 0 //index of the correct answer in the answers array
+        correct: 1 //index of the correct answer in the answers array
     },
     {
         text: "What is the fifth?",
@@ -67,7 +67,7 @@ const questions = [
             "Linus Torvalds",
             "Ada Lovelace"
         ],
-        correct: 0 //index of the correct answer in the answers array
+        correct: 2 //index of the correct answer in the answers array
     },
     
 ]
@@ -88,11 +88,11 @@ function loadQuestion(index) {
   //    - Reset its className back to "answer-btn" to clear any leftover .correct / .wrong / .disabled
   //    hint: convert answerBtnsNodeList to a real array first, then use forEach
   const btnsArray = Array.from(answerBtnsNodeList)
-    
+    console.log("<<<<<<",btnsArray);
   btnsArray.forEach(() => 
     {
         answerList.textContent = currentQ.answers;
-        answerList.className = "answer-btn";
+        answerBtnsNodeList.className = "answer-btn";
     }
 );
   // 5. Hide the next button
@@ -100,6 +100,51 @@ function loadQuestion(index) {
   // 6. Remove the "answered" class from questionCard
     questionCard.classList.remove('answered');
 }
+
+answerList.addEventListener("click", (event) => {
+  // 1. If the click was not on a BUTTON element, return early and do nothing
+  //    hint: check event.target.tagName — it will be the string "BUTTON" if a button was clicked
+        if (event.target.tagName !== "BUTTON"){
+            return;
+        }
+  // 2. Store the clicked button and figure out which index it is in the list
+  //    hint: convert answerBtnsNodeList to an array and use .indexOf(event.target)
+  
+        let clickedBtn = event.target;
+        let clickedIndex = [...answerBtnsNodeList].indexOf(event.target);
+  // 3. Get the correct answer index from the current question in the data array
+        let correctAns = questions[currentIndex].correct;
+  // 4. Compare: did the player pick the right one?
+  //    - If correct: add the "correct" class to the clicked button, increment score,
+  //      and update scoreDisplay.textContent
+  //    - If wrong: add the "wrong" class to the clicked button,
+  //      and add "correct" to the button at the correct index to reveal it
+        if (clickedIndex === correctAns){     //will compare the user selected choice to the correct answer choice in the index OF THE answer options which is stated within the questions array as correct
+            clickedBtn.classList.add("correct");
+            score++;
+            scoreDisplay.textContent = score;
+        }
+        else{
+            clickedBtn.classList.add("wrong");
+            answerBtnsNodeList[correctAns].classList.add("correct");
+        }
+  // 5. Disable all four answer buttons so the player can't change their answer
+  //    hint: convert to a real array and use forEach to add "disabled" to each
+        [...answerBtnsNodeList].forEach((button)=>{
+            button.disabled = true;
+        });
+  // 6. Add "answered" to questionCard and remove "hidden" from nextBtn
+        questionCard.classList.add('answered');
+        nextBtn.classList.remove('hidden');
+
+// Why does clicking a button inside #answer-list trigger this listener?
+// Answer: cause we have a click in addEventListener so when a button is clicked within answerList (which are only buttons) then the event happens
+//
+// What is the difference between event.target and event.currentTarget here?
+// event.target  → is the button the user selects
+// event.currentTarget → is the answerList or the container that is being looked into
+
+});
 
 
 
