@@ -21,55 +21,55 @@ const answerBtnsNodeList = document.querySelectorAll(".answer-btn");
 console.log(">>>>>>>>>>>>>>",answerBtnsNodeList) 
 const questions = [
     {
-        text: "What is the first?",
+        text: "我们在美国吗?",
         answers: [
-            "Tim -Lee",
-            "Bill Gates",
-            "Linus Torvalds",
-            "Ada Lovelace"
+            "不，我们在中国",
+            "对，我们在美国",
+            "我不知道",
+            "不，我们在日本"
         ],
-        correct: 0 //index of the correct answer in the answers array
+        correct: 1 //index of the correct answer in the answers array
     },
     // four more
     {
-        text: "What is the second",
+        text: "What does triple T mean?",
         answers: [
-            "Tim Berners-Lee",
-            "Bill Gates",
-            "Linus Torvalds",
-            "Ada Lovelace"
-        ],
-        correct: 2 //index of the correct answer in the answers array
-    },
-    {
-        text: "What is the third?",
-        answers: [
-            "Tim Berners-Lee",
-            "Bill Gates",
-            "Linus Torvalds",
-            "Ada Lovelace"
-        ],
-        correct: 3 //index of the correct answer in the answers array
-    },
-    {
-        text: "What is the fourth?",
-        answers: [
-            "Tim Berners-Lee",
-            "Bill Gates",
-            "Linus Torvalds",
-            "Ada Lovelace"
+            "Trouble in Terrorsit Town",
+            "Tung Tung Tung Sahur",
+            "Tech Tips Trivia",
+            "TTT"
         ],
         correct: 1 //index of the correct answer in the answers array
     },
     {
-        text: "What is the fifth?",
+        text: "Do you like this quiz?",
         answers: [
-            "Tim Berners-Lee",
-            "Bill Gates",
-            "Linus Torvalds",
-            "Ada Lovelace"
+            "No",
+            "No",
+            "Yes",
+            "No"
         ],
         correct: 2 //index of the correct answer in the answers array
+    },
+    {
+        text: "What is the best anime OAT?",
+        answers: [
+            "One Piece",
+            "Death Note",
+            "Golden Boy",
+            "Tensura"
+        ],
+        correct: 0 //index of the correct answer in the answers array
+    },
+    {
+        text: "What language was the first question in?",
+        answers: [
+            "Japanese",
+            "Korean",
+            "Swedish",
+            "Chinese"
+        ],
+        correct: 3 //index of the correct answer in the answers array
     },
     
 ]
@@ -99,7 +99,7 @@ function loadQuestion(index) {
     }
 );
   // 5. Hide the next button
-    nextBtn.className = "hidden";
+    nextBtn.className = "hidden"; //can also do nextBtn.classList.add("hidden")
   // 6. Remove the "answered" class from questionCard
     questionCard.classList.remove('answered');
 }
@@ -140,9 +140,9 @@ function showEndScreen(){
     playAgn.textContent = "Play Again";
   // 6. Append all three elements to endScreen
   //    note: createElement builds the node in memory — appendChild is what puts it on the page
-    endScreen.appendChild(finalScore);
-    endScreen.appendChild(cope);
-    endScreen.appendChild(playAgn);
+    endScreen.append(finalScore);
+    endScreen.append(cope);
+    endScreen.append(playAgn);
 }
 
 answerList.addEventListener("click", (event) => {
@@ -154,7 +154,7 @@ answerList.addEventListener("click", (event) => {
   // 2. Store the clicked button and figure out which index it is in the list
   //    hint: convert answerBtnsNodeList to an array and use .indexOf(event.target)
   
-        let clickedBtn = event.target;
+        let clickedBtn = event.target;  //THIS IS THE BUTTON THAT THE USER CLICKS
         let clickedIndex = [...answerBtnsNodeList].indexOf(event.target);
   // 3. Get the correct answer index from the current question in the data array
         let correctAns = questions[currentIndex].correct;
@@ -208,7 +208,7 @@ endScreen.addEventListener("click",(event)=>
   // 1. Return early if the clicked element is not the restart button
   //    hint: check event.target.id
   //    think: why can't we just do document.getElementById("restart-btn") at the top of the file?
-
+console.log("??????", event.target)
     if (event.target.id !== "restart-btn"){
         return;
     }
