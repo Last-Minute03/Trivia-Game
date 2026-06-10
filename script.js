@@ -1,5 +1,7 @@
 const gameTitle = document.getElementById("game-title");
 const scoreDisplay = document.getElementById("score");
+
+// can do queryselector and for the () just add the # before the id, ex: #question-number
 const questionNumber = document.getElementById("question-number");
 const questionText = document.getElementById("question-text");
 const questionCard = document.getElementById("question-card");
@@ -89,16 +91,58 @@ function loadQuestion(index) {
   //    hint: convert answerBtnsNodeList to a real array first, then use forEach
   const btnsArray = Array.from(answerBtnsNodeList)
     console.log("<<<<<<",btnsArray);
-  btnsArray.forEach(() => 
+  btnsArray.forEach((button, i) => //element, index
     {
-        answerList.textContent = currentQ.answers;
-        answerBtnsNodeList.className = "answer-btn";
+        button.textContent = currentQ.answers[i];
+        button.className = "answer-btn";
+        button.disabled = false;
     }
 );
   // 5. Hide the next button
     nextBtn.className = "hidden";
   // 6. Remove the "answered" class from questionCard
     questionCard.classList.remove('answered');
+}
+
+function showEndScreen(){
+
+// 1. Hide the question card
+
+    questionCard.classList.add("hidden");
+
+  // 2. Show the end screen (it started with class="hidden" — remove that now)
+    endScreen.classList.remove("hidden");
+
+    // endScreen.innerHTML = "";
+
+
+  // 3. Create an <h2> and set its textContent to show the final score
+  //    e.g. "You scored 3 out of 5"
+  //    hint: use the score and questions.length variables
+    const finalScore = document.createElement("h2");
+    finalScore.textContent = "You scored " + score + " out of " + questions.length;
+  // 4. Create a <p> for an encouragement message
+  //    Write a conditional with at least two different messages
+  //    (e.g. one for a perfect score, one for passing, one for failing)
+    const cope = document.createElement("p");
+    if (score === questions.length){
+        cope.textContent = "You are a chad gamer aura monster!!";
+    }
+    else if (score < 3) {
+        cope.textContent = "It aint much, but it was honest effort. Aimlabs is free btw";
+    }
+    else {
+        cope.textContent = " You did it! Congrats! So happy!";
+    }
+  // 5. Create a <button>, set its id to "restart-btn" and its textContent to "Play Again"
+    const playAgn = document.createElement("button");
+    playAgn.id = "restart-btn";
+    playAgn.textContent = "Play Again";
+  // 6. Append all three elements to endScreen
+  //    note: createElement builds the node in memory — appendChild is what puts it on the page
+    endScreen.appendChild(finalScore);
+    endScreen.appendChild(cope);
+    endScreen.appendChild(playAgn);
 }
 
 answerList.addEventListener("click", (event) => {
@@ -145,6 +189,20 @@ answerList.addEventListener("click", (event) => {
 // event.currentTarget → is the answerList or the container that is being looked into
 
 });
+
+nextBtn.addEventListener("click", () =>
+{
+    currentIndex++;
+    if( currentIndex < questions.length ){
+        loadQuestion(currentIndex);
+    }
+    else{
+        showEndScreen();
+        nextBtn.disabled = true;
+    }
+}
+);
+
 
 
 
