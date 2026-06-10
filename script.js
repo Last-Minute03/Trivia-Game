@@ -205,13 +205,22 @@ nextBtn.addEventListener("click", () =>
 
 endScreen.addEventListener("click",(event)=>
 {
+
+    const restartBtn = event.target.closest("#restart-btn");
+
   // 1. Return early if the clicked element is not the restart button
   //    hint: check event.target.id
   //    think: why can't we just do document.getElementById("restart-btn") at the top of the file?
-console.log("??????", event.target)
-    if (event.target.id !== "restart-btn"){
-        return;
-    }
+// console.log("??????", event.target)
+    if (!restartBtn){               //  if(event.target.id !== "restart-btn"){
+        return;                     //  return;
+    }                               //  }
+    
+// code on the LEFT works because    |  This code is the normal code which only targets
+// google translate adds a font      |  the button itself, it doesnt search for the 
+// on the layer with anything that   |  closest thing like the restartBtn variable does
+// has text since its translating    |  hence why it wouldnt allow clicks directly on it
+
 
   // 2. Reset both state variables (score and currentIndex) to 0
   //    - Also update scoreDisplay.textContent so the header reflects the reset

@@ -1,7 +1,13 @@
 This is a "quick project" for practicing DOM
 
-The play again button is not working propery, for some reason there is a font div i think right infront of the button so the only way to press the button is on the very edge of it instead of the middle of the button.
+Regarding the Play Again button issue. that is now solved in this update.
 
-Gotta look into it to fix that problem, aside from that the game works fine just need to make the game look more like a games
+The issue was due to a chrome extension (specefically google translate) which when translating an element that isnt native language it applys a font over it *for some reason* and regardless of wether or not the language changes (internally not by the translators action, eg: question 1 in chinese but the other questions in english) the font is still overlayed and will stay there. 
 
-![alt text](image.png)
+2 ways to fix the issue:
+
+1 - Learn every language spoken so that you dont need google translate
+
+2 - Check the fix in script.js line 214 to 222. There is an explanation there.
+
+* I did use AI to find the error since my lack of knowledge would never have allowed me to guess that it was a chrome extension much less google translate, of them all, to be the issue
